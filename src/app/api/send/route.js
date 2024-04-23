@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import EmailTemplate from '@/app/components/EmailTemplate'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const fromEmail = process.env.RESEND_FROM_EMAIL
@@ -7,7 +8,7 @@ const toEmail = 'me@ryanjordan.dev'
 
 export async function POST(req, res) {
 	const { email, subject, message } = await req.json()
-	console.log(email, subject, message)
+	console.log('Received', { email, subject, message })
 	try {
 		const { data, error } = await resend.emails.send({
 			from: fromEmail,
@@ -17,11 +18,15 @@ export async function POST(req, res) {
 		})
 
 		if (error) {
-			return NextResponse.json({ error })
+			console.log('Error sending email:', error)
+			return NextResponse.json({ error: error.message || error.toString() })
 		}
-
-		return NextResponse.json(data)
+		console.log('Success', data)
+		return NextResponse.json(data || { success: true })
 	} catch (error) {
-		return NextResponse.json({ error })
+		console.error('Catch Error:', error)
+		return NextResponse.json({
+			error: JSON.stringify(error, Object.getOwnPropertyNames(error))
+		})
 	}
 }
