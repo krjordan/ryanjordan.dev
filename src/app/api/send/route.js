@@ -3,15 +3,15 @@ import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const fromEmail = process.env.RESEND_FROM_EMAIL
+const toEmail = 'me@ryanjordan.dev'
 
 export async function POST(req, res) {
 	const { email, subject, message } = await req.json()
 	console.log(email, subject, message)
-	console.log('apiKey', process.env.RESEND_API_KEY)
 	try {
 		const { data, error } = await resend.emails.send({
 			from: fromEmail,
-			to: ['me@ryanjordan.dev', email],
+			to: toEmail,
 			subject: subject,
 			react: EmailTemplate({ email, subject, message })
 		})
