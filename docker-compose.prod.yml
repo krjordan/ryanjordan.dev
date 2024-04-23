@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    image: krjordan/ryanjordan.dev:latest
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL}
+    ports:
+      - 3000:3000
+    volumes:
+      - next-data:/usr/src/app/.next
+    networks:
+      - webnet
+
+networks:
+  webnet:
+
+volumes:
+  next-data:

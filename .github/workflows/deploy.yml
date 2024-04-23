@@ -42,5 +42,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd ryanjordan.dev
-            docker compose pull
-            docker compose up -d
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml up -d
