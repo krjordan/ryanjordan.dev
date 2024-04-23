@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ryanjordan.dev
+            cd /srv/websites/ryanjordan.dev
             if [ -f docker-compose.prod.yml ]; then
               docker compose -f docker-compose.prod.yml pull
               docker compose -f docker-compose.prod.yml up -d
