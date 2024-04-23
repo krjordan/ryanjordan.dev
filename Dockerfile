@@ -12,6 +12,9 @@ COPY package*.json ./
 
 RUN npm install
 
+# Remove the .next directory to clear any existing build cache
+RUN rm -rf .next
+
 COPY . .
 
 RUN npm run build
