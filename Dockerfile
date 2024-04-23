@@ -1,3 +1,6 @@
+ARG RESEND_API_KEY
+ARG RESEND_FROM_EMAIL
+
 FROM node:20.12.2-alpine
 
 WORKDIR /usr/src/app
@@ -7,6 +10,9 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+
+ENV RESEND_API_KEY=${RESEND_API_KEY}
+ENV RESEND_FROM_EMAIL=${RESEND_FROM_EMAIL}
 
 RUN npm run build
 
