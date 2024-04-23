@@ -40,8 +40,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           source: 'docker-compose.prod.yml'
-          script: |
-            cd ryanjordan.dev
+          target: 'ryanjordan.dev'
 
       - name: Deploy to server
         uses: appleboy/ssh-action@master
