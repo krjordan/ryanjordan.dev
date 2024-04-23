@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           source: 'docker-compose.prod.yml'
-          target: '/home/${{ secrets.SERVER_USER }}/ryanjordan.dev'
+          target: '/${{ secrets.SERVER_USER }}/ryanjordan.dev'
 
       - name: Deploy to server
         uses: appleboy/ssh-action@master
@@ -49,7 +49,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/${{ secrets.SERVER_USER }}/ryanjordan.dev
+            cd /${{ secrets.SERVER_USER }}/ryanjordan.dev
             if [ -f docker-compose.prod.yml ]; then
               docker compose -f docker-compose.prod.yml pull
               docker compose -f docker-compose.prod.yml up -d
