@@ -12,7 +12,7 @@ export async function POST(req, res) {
 	try {
 		const { data, error } = await resend.emails.send({
 			from: fromEmail,
-			to: toEmail,
+			to: [toEmail, email],
 			subject: subject,
 			react: EmailTemplate({ email, subject, message })
 		})

@@ -21,6 +21,9 @@ export const EmailTemplate = ({ email, subject, message }) => (
 			</p>
 			<hr />
 			<p>
+				<strong>Email:</strong> {email}
+			</p>
+			<p>
 				<strong>Message Details:</strong>
 			</p>
 			<blockquote
